@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-may-2015 9:13:48 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="modelo.Vuelo" table="VUELO">
+		<id name="id" type="int">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="numero" type="int" column="numero" not-null="true" unique="true">
+	<!-- También se puede utilizar la etiqueta <column> anidada 
+		<property name="numero" type="int">
+			<column name="numero" not-null="true" unique="true" />  -->
+		</property>
+		<property name="longitud" type="int">
+			<column name="longitud" not-null="true" />
+		</property>
+		<property name="longitudPies" formula="longitud*3">
+		</property>
+		<property name="horaSalida" type="java.util.Date">
+			<column name="HORASALIDA" />
+		</property>
+		<property name="tipoVuelo">
+			<column name="TIPOVUELO" />
+			<type name="org.hibernate.type.EnumType">
+				<!-- Con el 12 indicamos que se almacene como varchar -->
+				<param name="type">12</param>
+				<param name="enumClass">modelo.Vuelo$TipoVuelo</param>
+			</type>
+		</property>
+		<!-- En el caso de cadenas debemos indicar que es tipo text -->
+		<property name="texto" type="text">
+			<column name="TEXTO" not-null="true" />
+		</property>
+		<!-- Los tipos binarios no hace falta especificarlos, podríamos poner binary -->
+		<property name="codigo">
+			<column name="codigo" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>
